@@ -29,6 +29,9 @@
   (setq org-log-done t)
   (setq org-log-into-drawer t))
 
+(after! org
+  (setq org-archive-location "~/Projects/org/roam/gtd/gtd.org_archive::"))
+
 (setq projectile-project-search-path '("~/Projects/"))
 
 (setq helm-mode-fuzzy-match t)
@@ -53,52 +56,53 @@
 (setq browse-url-browser-function 'eww-browse-url)
 (setq eww-download-directory "~/cached-web-pages")
 
-(setq elfeed-feeds
-      '("https://hnrss.org/best"
-        "https://www.lesswrong.com/feed.xml?view=curated-rss"
-        "https://slatestarcodex.com/feed/"
-        "https://lifehacker.com/rss"
-        "https://hackaday.com/blog/feed/"
-        "https://feeds.arstechnica.com/arstechnica/index"
-        "https://mindingourway.com/rss/"
-        "https://www.reddit.com/r/Biohackers/.rss"
-        "https://www.reddit.com/r/QuantifiedSelf/.rss"
-        "https://www.reddit.com/r/kubernetes/.rss"
-        "https://www.reddit.com/r/GUIX/.rss"
-        "https://www.reddit.com/r/emacs/.rss"
-        "https://www.reddit.com/r/orgmode/.rss"
-        "https://www.reddit.com/r/selfhosted/.rss"
-        "https://reminder.media/rss"
-        "https://lesswrong.ru/rss.xml"))
-
-(setq org-roam-directory "~/Projects/org/roam")
-(setq org-roam-db-location  "~/Projects/org/roam/org-roam.db")
-
-(setq org-roam-dailies-capture-templates
-      '(("d" "default" entry
-         "* %?"
-         :target (file+head "%<%Y-%m-%d>.org"
-                            "#+title: %<%A, %d %B %Y>\n"))))
-
-(setq org-roam-capture-templates
- '(("t" "Task note" plain
-    "%?"
-    :if-new (file+head "tasks/%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n")
-    :unnarrowed t)
-   ("l" "Literate note" plain
-    "%?"
-    :if-new (file+head "literate/%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n")
-    :unnarrowed t)
-   ("c" "Conceptual note" plain "%?"
-    :if-new (file+head "conceptual/%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n")
-    :unnarrowed t)
-   ("p" "Project note" plain
-    "%?"
-    :if-new (file+head "project/%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n")
-    :unnarrowed t)))
+(after! elfeed
+  (setq elfeed-feeds
+        '("https://hnrss.org/best"
+          "https://www.lesswrong.com/feed.xml?view=curated-rss"
+          "https://slatestarcodex.com/feed/"
+          "https://lifehacker.com/rss"
+          "https://hackaday.com/blog/feed/"
+          "https://feeds.arstechnica.com/arstechnica/index"
+          "https://mindingourway.com/rss/"
+          "https://www.reddit.com/r/Biohackers/.rss"
+          "https://www.reddit.com/r/QuantifiedSelf/.rss"
+          "https://www.reddit.com/r/kubernetes/.rss"
+          "https://www.reddit.com/r/GUIX/.rss"
+          "https://www.reddit.com/r/emacs/.rss"
+          "https://www.reddit.com/r/orgmode/.rss"
+          "https://www.reddit.com/r/selfhosted/.rss"
+          "https://reminder.media/rss"
+          "https://lesswrong.ru/rss.xml")))
 
 (after! org-roam
-    (map! :leader
+  (setq org-roam-directory "~/Projects/org/roam")
+  (setq org-roam-db-location  "~/Projects/org/roam/org-roam.db")
+
+  (setq org-roam-dailies-capture-templates
+        '(("d" "default" entry
+           "* %?"
+           :target (file+head "%<%Y-%m-%d>.org"
+                              "#+title: %<%A, %d %B %Y>\n"))))
+
+  (setq org-roam-capture-templates
+        '(("t" "Task note" plain
+           "%?"
+           :if-new (file+head "tasks/%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n")
+           :unnarrowed t)
+          ("l" "Literate note" plain
+           "%?"
+           :if-new (file+head "literate/%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n")
+           :unnarrowed t)
+          ("c" "Conceptual note" plain "%?"
+           :if-new (file+head "conceptual/%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n")
+           :unnarrowed t)
+          ("p" "Project note" plain
+           "%?"
+           :if-new (file+head "project/%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n")
+           :unnarrowed t)))
+
+  (map! :leader
         :prefix "r"
         :desc "org-roam-node-insert" "i" #'org-roam-node-insert
         :desc "org-roam-node-find" "f" #'org-roam-node-find
@@ -124,12 +128,7 @@
          (file "templates/bookmarks.org"))
         ("c" "Todo from x clipboard" entry
          (file+headline "roam/gtd/gtd.org" "Inbox")
-         (file "templates/external.org"))
-        ("d" "default" plain (function org-roam--capture-get-point)
-         "%?"
-         :file-name "%<%Y%m%d%H%M%S>-${slug}"
-         :head "#+title: ${title}\n#++roam_tags:"
-         :unnarrowed t)))
+         (file "templates/external.org"))))
 
 (setq deft-directory "~/Projects/org")
 (setq deft-extensions '("txt" "tex" "org"))
@@ -143,7 +142,7 @@
 (org-clock-persistence-insinuate)
 (setq org-clock-persist t)
 
-(defvar polybar--default-header "no active clocks")
+(defvar polybar--default-header "no active clocks!")
 
 (defun polybar--format-line (task time)
   (concat task " ("(number-to-string time) " min)"))
@@ -176,8 +175,6 @@
               (message "Deleted file %s." filename)
               (kill-buffer)))
       (message "Not a file visiting buffer!"))))
-
-(setq org-archive-location "~/Projects/org/roam/gtd/gtd.org_archive::")
 
 (setq docker-tramp-use-names t)
 
