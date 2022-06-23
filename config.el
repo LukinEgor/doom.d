@@ -113,22 +113,23 @@
         :desc "org-roam-capture" "c" #'org-roam-capture))
 
 ;; %Y-%m-%d.org
-(setq org-capture-templates
-      '(("t" "Todo" entry
-         (file+headline "roam/gtd/gtd.org" "Inbox")
-         (file "templates/todo.org"))
-        ("f" "Fast todo" entry
-         (file+headline "roam/gtd/gtd.org" "Inbox")
-         (file "templates/fast_todo.org"))
-        ("e" "English word" entry
-         (file+headline "anki/english_words.org" "Backlog")
-         (file "templates/english_words.org"))
-        ("b" "Add bookmark" entry
-         (file+headline "roam/notes/bookmarks.org" "Inbox")
-         (file "templates/bookmarks.org"))
-        ("c" "Todo from x clipboard" entry
-         (file+headline "roam/gtd/gtd.org" "Inbox")
-         (file "templates/external.org"))))
+(after! org
+  (setq org-capture-templates
+        '(("t" "Todo" entry
+           (file+headline "roam/gtd/gtd.org" "Inbox")
+           (file "templates/todo.org"))
+          ("f" "Fast todo" entry
+           (file+headline "roam/gtd/gtd.org" "Inbox")
+           (file "templates/fast_todo.org"))
+          ("e" "English word" entry
+           (file+headline "anki/english_words.org" "Backlog")
+           (file "templates/english_words.org"))
+          ("b" "Add bookmark" entry
+           (file+headline "roam/notes/bookmarks.org" "Inbox")
+           (file "templates/bookmarks.org"))
+          ("c" "Todo from x clipboard" entry
+           (file+headline "roam/gtd/gtd.org" "Inbox")
+           (file "templates/external.org")))))
 
 (setq deft-directory "~/Projects/org")
 (setq deft-extensions '("txt" "tex" "org"))
