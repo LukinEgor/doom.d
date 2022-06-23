@@ -224,7 +224,7 @@ Setup org directory.
 Set default file for all archived items:
 #+begin_src elisp :tangle config.el
 (after! org
-  (setq org-archive-location "~/Projects/org/roam/gtd/gtd.org_archive::"))
+  (setq org-archive-location "~/Projects/org/roam/gtd/gtd_archive.org::"))
 #+end_src
 ** Projectile
 #+begin_src elisp :tangle config.el

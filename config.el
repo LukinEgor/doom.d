@@ -30,7 +30,7 @@
   (setq org-log-into-drawer t))
 
 (after! org
-  (setq org-archive-location "~/Projects/org/roam/gtd/gtd.org_archive::"))
+  (setq org-archive-location "~/Projects/org/roam/gtd/gtd_archive.org::"))
 
 (setq projectile-project-search-path '("~/Projects/"))
 
