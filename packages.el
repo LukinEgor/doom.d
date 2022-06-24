@@ -1,3 +1,5 @@
+(package! reverso :recipe (:repo "https://github.com/LukinEgor/reverso-emacs"))
+
 (package! anki-editor)
 (package! tramp-term)
 (package! google-translate :pin "6f7b75b2aa1ff4e50b6f1579cafddafae5705dbd")

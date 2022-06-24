@@ -169,6 +169,15 @@
 (setq yas-snippet-dirs '("~/Projects/snippets"
                          "~/emacs.d/mysnippets"))
 
+(after! reverso
+  (setq reverso-default-source-lang "english")
+  (setq reverso-default-target-lang "russian")
+
+  (map! :leader
+        :prefix "k"
+        :desc "reverso-direct-search" "d" #'reverso-direct-search
+        :desc "reverso-reverse-search" "r" #'reverso-reverse-search))
+
 (defun delete-file-and-buffer ()
   "Kill the current buffer and deletes the file it is visiting."
   (interactive)
