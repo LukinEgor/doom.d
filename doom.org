@@ -234,6 +234,10 @@ Set default file for all archived items:
 fuzzy search by default
 #+begin_src elisp :tangle config.el
 (setq helm-mode-fuzzy-match t)
+
+(setq ivy-re-builders-alist
+      '((counsel-ag . regexp-quote)
+        (t      . ivy--regex-fuzzy)))
 #+end_src
 ** Ein
 #+begin_src elisp :tangle config.el

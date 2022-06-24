@@ -36,6 +36,10 @@
 
 (setq helm-mode-fuzzy-match t)
 
+(setq ivy-re-builders-alist
+      '((counsel-ag . regexp-quote)
+        (t      . ivy--regex-fuzzy)))
+
 (setq ein:output-area-inlined-images t)
 
 ;; Google Translate Integration
