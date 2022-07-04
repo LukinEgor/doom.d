@@ -101,6 +101,9 @@
           ("c" "Conceptual note" plain "%?"
            :if-new (file+head "conceptual/%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n")
            :unnarrowed t)
+          ("r" "Planning note" plain "%?"
+           :if-new (file+head "planning/%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n")
+           :unnarrowed t)
           ("p" "Project note" plain
            "%?"
            :if-new (file+head "project/%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n")
