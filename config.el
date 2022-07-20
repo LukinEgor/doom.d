@@ -208,6 +208,23 @@
           (set-visited-file-name new-name)
           (set-buffer-modified-p nil))))))
 
+(defun org--photos-list ()
+  (let* ((date (string-replace "-" "" (org-read-date)))
+         (photos-path "~/photos/mobile/DCIM/Camera/")
+         (command (concat "ls " photos-path " | grep " date))
+         (photo-paths (split-string (shell-command-to-string command) "\n")))
+    (seq-reduce
+     (lambda (acc time)
+       (if (not (string-blank-p time))
+           (concat acc "\n"
+                   "#+attr_html: :width 750px\n"
+                   "[[file:" photos-path time "][" time "]" "]") acc))
+     photo-paths "")))
+
+(defun org-insert-photos ()
+  (interactive)
+  (insert (org--photos-list)))
+
 (setq docker-tramp-use-names t)
 
 (setq org-use-fast-todo-selection t)
