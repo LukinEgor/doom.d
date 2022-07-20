@@ -10,8 +10,8 @@ ln -s ~/Projects/doom.d ~/.doom.d
 
 * Usage
 ** After some changes in doom.org file you need:
-- exec `M-x org-babel-tangle` in doom.org
-- exec `M-x doom/reload`
+- exec ~M-x org-babel-tangle~ in doom.org
+- exec ~M-x doom/reload~
 
 * TODO:
 - [-] setup auto-tangle
